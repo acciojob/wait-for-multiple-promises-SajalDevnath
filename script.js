@@ -1,6 +1,5 @@
 const getRandomDelay = () => Math.floor(Math.random() * 2000) + 1000;
 
-
 const promises = Array.from({ length: 3 }, (_, i) => {
   const delay = getRandomDelay();
   return new Promise(resolve => setTimeout(() => resolve({ name: `Promise ${i + 1}`, time: delay / 1000 }), delay));
@@ -31,5 +30,6 @@ Promise.all(promises).then(results => {
       <td>${totalTime}</td>
     </tr>
   `;
+}).catch(error => {
+  console.error('An error occurred:', error);
 });
-
