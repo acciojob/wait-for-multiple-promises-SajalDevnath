@@ -2,7 +2,13 @@ const getRandomDelay = () => Math.floor(Math.random() * 2000) + 1000;
 
 const promises = Array.from({ length: 3 }, (_, i) => {
   const delay = getRandomDelay();
-  return new Promise(resolve => setTimeout(() => resolve({ name: `Promise ${i + 1}`, time: delay / 1000 }), delay));
+  return new Promise(resolve => {
+    const start = Date.now();
+    setTimeout(() => {
+      const timeTaken = (Date.now() - start) / 1000;
+      resolve({ name: `Promise ${i + 1}`, time: timeTaken });
+    }, delay);
+  });
 });
 
 document.getElementById('output').innerHTML = `
